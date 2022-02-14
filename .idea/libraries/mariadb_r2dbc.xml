@@ -1,0 +1,37 @@
+<component name="libraryTable">
+  <library name="mariadb.r2dbc" type="repository">
+    <properties maven-id="org.mariadb:r2dbc-mariadb:1.1.1-rc" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/mariadb/r2dbc-mariadb/1.1.1-rc/r2dbc-mariadb-1.1.1-rc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/r2dbc/r2dbc-spi/0.9.0.M2/r2dbc-spi-0.9.0.M2.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/reactivestreams/reactive-streams/1.0.3/reactive-streams-1.0.3.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/projectreactor/reactor-core/3.4.8/reactor-core-3.4.8.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/projectreactor/netty/reactor-netty/1.0.9/reactor-netty-1.0.9.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/projectreactor/netty/reactor-netty-core/1.0.9/reactor-netty-core-1.0.9.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-handler/4.1.65.Final/netty-handler-4.1.65.Final.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-common/4.1.65.Final/netty-common-4.1.65.Final.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-resolver/4.1.65.Final/netty-resolver-4.1.65.Final.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-buffer/4.1.65.Final/netty-buffer-4.1.65.Final.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-transport/4.1.65.Final/netty-transport-4.1.65.Final.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-codec/4.1.65.Final/netty-codec-4.1.65.Final.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-handler-proxy/4.1.65.Final/netty-handler-proxy-4.1.65.Final.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-codec-socks/4.1.65.Final/netty-codec-socks-4.1.65.Final.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-resolver-dns/4.1.65.Final/netty-resolver-dns-4.1.65.Final.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-codec-dns/4.1.65.Final/netty-codec-dns-4.1.65.Final.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-resolver-dns-native-macos/4.1.65.Final/netty-resolver-dns-native-macos-4.1.65.Final-osx-x86_64.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-transport-native-unix-common/4.1.65.Final/netty-transport-native-unix-common-4.1.65.Final.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-transport-native-epoll/4.1.65.Final/netty-transport-native-epoll-4.1.65.Final-linux-x86_64.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/projectreactor/netty/reactor-netty-http/1.0.9/reactor-netty-http-1.0.9.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-codec-http/4.1.65.Final/netty-codec-http-4.1.65.Final.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-codec-http2/4.1.65.Final/netty-codec-http2-4.1.65.Final.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/projectreactor/netty/reactor-netty-http-brave/1.0.9/reactor-netty-http-brave-1.0.9.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/zipkin/brave/brave-instrumentation-http/5.13.3/brave-instrumentation-http-5.13.3.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/zipkin/brave/brave/5.13.3/brave-5.13.3.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/zipkin/reporter2/zipkin-reporter-brave/2.16.3/zipkin-reporter-brave-2.16.3.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/zipkin/reporter2/zipkin-reporter/2.16.3/zipkin-reporter-2.16.3.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/zipkin/zipkin2/zipkin/2.23.2/zipkin-2.23.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
