@@ -15,8 +15,10 @@
             integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
             crossorigin=""></script>
 </head>
-<body class="body-style" onload="getGeoLock()">
+<body class="body-style display-flex" onload="getGeoLock()">
     <div id="map"></div>
+    <a class="button-style submit-button" href="${pageContext.request.contextPath}/heroes">SUPER INSCRIPTION</a>
+    <a class="button-style alert-button" href="${pageContext.request.contextPath}/incidents/create">APPELER À <br>LA RESCOUSSE</a>
     <dialog id="dialog" class="flex-direction-column">
         <h4 class="font-family-raleway">Il semblerait que nous ne trouvons pas votre position</h4>
         <h6 class="font-family-raleway">Merci de renseigner le nom de votre ville.</h6>
@@ -35,6 +37,5 @@
     %>
 </body>
 </html>
-<!--<a class="button-style submit-button" href="${pageContext.request.contextPath}/heroes">SUPER INSCRIPTION</a>
-<a class="button-style alert-button" href="${pageContext.request.contextPath}/incidents">APPELER À <br>LA RESCOUSSE</a>
+<!--
 <button class="button-style alert-button"  onclick="getGeoLock()">Coucou je suis la</button>

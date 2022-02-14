@@ -14,10 +14,10 @@ function showPosition(position){
 }
 
 function showError(){
-    if (sessionStorage.getItem("position") === null){
-        dialog.style.display = 'flex';
-        dialog.open = true;
-    }
+   // if (sessionStorage.getItem("position") === null){
+   //     dialog.style.display = 'flex';
+   //     dialog.open = true;
+   // }
 }
 
 function setPosition(){
@@ -31,5 +31,5 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 L.marker([48.857235, 2.308396]).addTo(map)
-    .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+    .bindPopup('Notre QG')
     .openPopup();

@@ -20,7 +20,7 @@ import java.net.http.HttpResponse;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-@WebServlet(name = "Create incident", value = "/incidents")
+@WebServlet(name = "Create incident", value = "/incidents/create")
 public class Incidents extends HttpServlet {
     public void init() {
     }
@@ -34,7 +34,7 @@ public class Incidents extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        request.getRequestDispatcher("/pages/incidents/index.jsp").forward(request, response);
+        request.getRequestDispatcher("/pages/incidents/create.jsp").forward(request, response);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
