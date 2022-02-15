@@ -7,10 +7,10 @@ import java.sql.SQLException;
 public class DatabaseConnection {
     public static Connection initializeDatabase() throws SQLException, ClassNotFoundException{
         String dbDriver = "org.mariadb.jdbc.Driver";
-        String dbUrl = "jdbc:mariadb://localhost:8889/";
+        String dbUrl = "jdbc:mariadb://localhost:3306/";
         String dbName = "superHeroes";
         String dbUsername = "root";
-        String dbPassword = "root";
+        String dbPassword = "";
 
 
         Class.forName(dbDriver);

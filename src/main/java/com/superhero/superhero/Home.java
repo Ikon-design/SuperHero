@@ -21,13 +21,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
-@WebServlet(name = "home", value = "/")
+@WebServlet(name = "home", value = "/home")
 public class Home extends HttpServlet {
 
     public void init() {
     }
 
-    String deleteChar (String value){
+    String deleteChar(String value) {
         String stringToChange;
         stringToChange = value.replace("[", "");
         stringToChange = stringToChange.replace("]", "");
@@ -36,12 +36,12 @@ public class Home extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         ArrayList<classes.Heroes> list = new ArrayList<Heroes>();
-        try{
+        try {
             Connection connection = DatabaseConnection.initializeDatabase();
             Statement statement = connection.createStatement();
             String query = "select * from heroes";
             ResultSet resultSet = statement.executeQuery(query);
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 classes.Heroes heroes = new classes.Heroes();
                 heroes.name = resultSet.getString("name");
                 heroes.phone = resultSet.getString("phone");
@@ -54,35 +54,29 @@ public class Home extends HttpServlet {
             }
             request.setAttribute("heroes", list);
             request.getRequestDispatcher("/pages/index.jsp").forward(request, response);
-        }catch (Exception err){
+        } catch (Exception err) {
             err.printStackTrace();
         }
     }
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
-            Connection connection = DatabaseConnection.initializeDatabase();
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO incidents values(?, ?)");
-            statement.setInt(1, 0);
             String name = request.getParameter("name");
-            statement.setString(2, name );
-            statement.executeUpdate();
-            statement.close();
-            connection.close();
-            try {
-                var client = HttpClient.newHttpClient();
-                var rt = HttpRequest.newBuilder(URI.create("http://api.openweathermap.org/geo/1.0/direct?q=" + name + "&limit=1&appid=" + UserInformation.apiKey))
-                        .header("accept", "application/json")
-                        .build();
-                var reponse = client.send(rt, HttpResponse.BodyHandlers.ofString());
-                var parsedResponse = deleteChar(reponse.body().toString());
-                ObjectMapper objectMapper = new ObjectMapper();
-                GeoCoder geoCoder = objectMapper.readValue(parsedResponse, GeoCoder.class);
-            } catch (Exception err){
-                err.printStackTrace();
-            }
+            var client = HttpClient.newHttpClient();
+            var rt = HttpRequest.newBuilder(URI.create("http://api.openweathermap.org/geo/1.0/direct?q=" + name + "&limit=1&appid=" + UserInformation.apiKey))
+                    .header("accept", "application/json")
+                    .build();
+            var reponse = client.send(rt, HttpResponse.BodyHandlers.ofString());
+            var parsedResponse = deleteChar(reponse.body().toString());
+            ObjectMapper objectMapper = new ObjectMapper();
+            UserInformation.userPosition = objectMapper.readValue(parsedResponse, GeoCoder.class);
+            System.out.println(UserInformation.userPosition.name);
+            UserInformation.latitude = UserInformation.userPosition.lat;
+            UserInformation.longitude = UserInformation.userPosition.lon;
+            response.sendRedirect(request.getContextPath() + "/home");
         } catch (Exception err) {
             err.printStackTrace();
         }
+
     }
 }
