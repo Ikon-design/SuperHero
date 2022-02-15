@@ -15,7 +15,7 @@
 </head>
 <body class="body-style display-flex">
 <div id="map"></div>
-<form class="form-container" action="./incidents" method="post">
+<form class="form-container" action="${pageContext.request.contextPath}/incidents" method="post">
     <H6 class="full-width-field form-title">SUPER APPEL</H6>
     <div class="full-width-field">
         <label for="name">Nom :</label>

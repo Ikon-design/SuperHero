@@ -21,7 +21,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
-@WebServlet(name = "home", value = "/home")
+@WebServlet(name = "home", value = "/")
 public class Home extends HttpServlet {
 
     public void init() {
@@ -78,14 +78,11 @@ public class Home extends HttpServlet {
                 var parsedResponse = deleteChar(reponse.body().toString());
                 ObjectMapper objectMapper = new ObjectMapper();
                 GeoCoder geoCoder = objectMapper.readValue(parsedResponse, GeoCoder.class);
-                System.out.println(geoCoder.lon);
-                request.getRequestDispatcher("./").forward(request, response);
             } catch (Exception err){
                 err.printStackTrace();
             }
         } catch (Exception err) {
             err.printStackTrace();
-            //System.out.println(request.getParameter("name"));
         }
     }
 }

@@ -20,13 +20,13 @@ import java.net.http.HttpResponse;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-@WebServlet(name = "Create incident", value = "/incidents/create")
+@WebServlet(name = "Create incident", value = "/incidents")
 public class Incidents extends HttpServlet {
     public void init() {
     }
 
 
-    String deleteChar (String value){
+    String deleteChar(String value) {
         String stringToChange;
         stringToChange = value.replace("[", "");
         stringToChange = stringToChange.replace("]", "");
@@ -43,13 +43,13 @@ public class Incidents extends HttpServlet {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO incidents values(?, ?)");
             statement.setInt(1, 0);
             String name = request.getParameter("name");
-            statement.setString(2, name );
+            statement.setString(2, name);
+            System.out.println("test");
             statement.executeUpdate();
             statement.close();
             connection.close();
-            request.getRequestDispatcher("/pages/incidents/index.jsp").forward(request, response);
             try {
-                var client = HttpClient.newHttpClient();
+               /* var client = HttpClient.newHttpClient();
                 var rt = HttpRequest.newBuilder(URI.create("http://api.openweathermap.org/geo/1.0/direct?q=" + name + "&limit=1&appid=" + UserInformation.apiKey))
                         .header("accept", "application/json")
                         .build();
@@ -57,13 +57,14 @@ public class Incidents extends HttpServlet {
                 var parsedResponse = deleteChar(reponse.body().toString());
                 ObjectMapper objectMapper = new ObjectMapper();
                 GeoCoder geoCoder = objectMapper.readValue(parsedResponse, GeoCoder.class);
-                System.out.println(geoCoder.lon);
-            } catch (Exception err){
+                request.setAttribute("geoCoder", geoCoder);*/
+                System.out.println("lon");
+                //response.sendRedirect("/");
+            } catch (Exception err) {
                 err.printStackTrace();
             }
         } catch (Exception err) {
             err.printStackTrace();
-            //System.out.println(request.getParameter("name"));
         }
     }
 }
