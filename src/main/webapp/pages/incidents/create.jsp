@@ -18,12 +18,12 @@
 <form class="form-container" action="${pageContext.request.contextPath}/incidents" method="post">
     <H6 class="full-width-field form-title">SUPER APPEL</H6>
     <div class="full-width-field">
-        <label for="name">Nom :</label>
-        <input type="text" id="name" placeholder="Paris" name="name" oninput="setCity()">
+        <label for="name">Votre ville :</label>
+        <input type="text" id="name" placeholder="Paris" name="name" oninput="setCity()" value="<%=request.getAttribute("name")%>">
     </div>
     <div class="full-width-field">
         <label for="incident">Super incident gérable :</label>
-        <select id="incident">
+        <select id="incident" name="incident">
             <jstl:forEach var="i" begin="0" end="9">
                 <option>${Incident.values()[i]}</option>
             </jstl:forEach>

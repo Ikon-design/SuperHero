@@ -1,7 +1,7 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="enums.Incident" %>
+<%@ page import="classes.UserInformation" %>
 <%@ page import="classes.Heroes" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="jstl" uri="http://java.sun.com/jstl/core" %>
 <html>
 <head>
@@ -14,28 +14,32 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
             integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
             crossorigin=""></script>
+    <script src="https://npmcdn.com/leaflet-geometryutil"></script>
 </head>
-<body class="body-style display-flex" onload="getGeoLock()">
-    <div id="map"></div>
-    <a class="button-style submit-button" href="${pageContext.request.contextPath}/heroes">SUPER INSCRIPTION</a>
-    <a class="button-style alert-button" href="${pageContext.request.contextPath}/incidents">APPELER À <br>LA RESCOUSSE</a>
-    <dialog id="dialog" class="flex-direction-column">
-        <h4 class="font-family-raleway">Il semblerait que nous ne trouvons pas votre position</h4>
-        <h6 class="font-family-raleway">Merci de renseigner le nom de votre ville.</h6>
-        <form class="display-flex flex-direction-column" action="./home" method="post">
-            <input type="text" id="name" placeholder="Votre ville" required name="name">
-            <input type="submit" onclick="setPosition()">
-        </form>
-    </dialog>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/public/script.js"></script>
-    <% ArrayList<Heroes> list = (ArrayList<Heroes>) request.getAttribute("heroes");
-        for (Heroes s:list){%>
-            <script>
-                L.marker([<%=s.latitude%>,<%=s.longitude%>]).bindPopup("<%=s.name%>").addTo(map)
-            </script>
-        <%}
-    %>
+<body class="body-style display-flex" onload="getGeoLock(<%=UserInformation.latitude%>,<%=UserInformation.longitude %>)">
+<div id="map"></div>
+<a class="button-style submit-button" href="${pageContext.request.contextPath}/heroes">SUPER INSCRIPTION</a>
+<a class="button-style alert-button" href="${pageContext.request.contextPath}/incidents">APPELER À <br>LA RESCOUSSE</a>
+<dialog id="dialog" class="flex-direction-column">
+    <h4 class="font-family-raleway">Il semblerait que nous ne trouvons pas votre position</h4>
+    <h6 class="font-family-raleway">Merci de renseigner le nom de votre ville.</h6>
+    <form class="display-flex flex-direction-column" action="${pageContext.request.contextPath}/home" method="post">
+        <input type="text" id="name" placeholder="Votre ville" required name="name">
+        <input type="submit">
+    </form>
+</dialog>
+<script type="text/javascript" src="${pageContext.request.contextPath}/public/script.js"></script>
+<% ArrayList<Heroes> list = (ArrayList<Heroes>) request.getAttribute("heroes");
+    for (Heroes s:list){%>
+<script>
+    hero = L.marker([<%=s.latitude%>,<%=s.longitude%>]).bindPopup("<%=s.name%>").addTo(map)
+    distance = L.GeometryUtil.length([userPosition._latlng, test._latlng])
+    //if (distance <= 5000 ){
+        //hero.addTo(map)
+    //}
+</script>
+<%}
+%>
+
 </body>
 </html>
-<!--
-<button class="button-style alert-button"  onclick="getGeoLock()">Coucou je suis la</button>

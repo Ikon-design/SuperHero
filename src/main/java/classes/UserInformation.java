@@ -1,8 +1,9 @@
 package classes;
 
 public class UserInformation {
-    public static String apiKey = "";
-    static String city;
-    static double latitude;
-    static double longitude;
+    static public String apiKey = "";
+    static public GeoCoder userPosition;
+    static public double latitude = 91;
+    static public double longitude = 91;
+    static public String userProbleme = "";
 }
