@@ -19,7 +19,7 @@
     <H6 class="full-width-field form-title">SUPER APPEL</H6>
     <div class="full-width-field">
         <label for="name">Votre ville :</label>
-        <input type="text" id="name" placeholder="Paris" name="name" oninput="setCity()" value="<%=request.getAttribute("name")%>">
+        <input type="text" id="name" placeholder="Paris" name="name" oninput="" value="<%=request.getAttribute("name")%>">
     </div>
     <div class="full-width-field">
         <label for="incident">Super incident gérable :</label>
@@ -29,7 +29,7 @@
             </jstl:forEach>
         </select>
     </div>
-    <input type="submit" value="SUPER VALIDATION" class="form-button full-width-field" onclick="setPosition()">
+    <input type="submit" value="SUPER VALIDATION" class="form-button full-width-field" onclick="">
 </form>
 </body>
 <script type="text/javascript" src="${pageContext.request.contextPath}/public/script.js"></script>

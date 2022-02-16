@@ -38,12 +38,23 @@ public class Incidents extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        if (!Objects.equals(UserInformation.userProbleme, "")) {
+        System.out.println(UserInformation.userProbleme);
+        if (UserInformation.userProbleme != "") {
             try {
+                var client = HttpClient.newHttpClient();
+                var rt = HttpRequest.newBuilder(URI.create("http://api.openweathermap.org/geo/1.0/direct?q=" + UserInformation.userCity + "&limit=1&appid=" + UserInformation.apiKey))
+                        .header("accept", "application/json")
+                        .build();
+                var reponse = client.send(rt, HttpResponse.BodyHandlers.ofString());
+                var parsedResponse = deleteChar(reponse.body().toString());
+                ObjectMapper objectMapper = new ObjectMapper();
+                UserInformation.userPosition = objectMapper.readValue(parsedResponse, GeoCoder.class);
+                UserInformation.latitude = UserInformation.userPosition.lat;
+                UserInformation.longitude = UserInformation.userPosition.lon;
                 ArrayList<classes.Heroes> list = new ArrayList<Heroes>();
                 Connection connection = DatabaseConnection.initializeDatabase();
                 Statement statement = connection.createStatement();
-                String query = "select * from heroes";
+                String query = "select * from heroes WHERE heroes.fIncident = '" + UserInformation.userProbleme + "' OR heroes.sIncident = '" + UserInformation.userProbleme + "' OR heroes.tIncident = '" + UserInformation.userProbleme + "'";
                 ResultSet resultSet = statement.executeQuery(query);
                 while (resultSet.next()) {
                     classes.Heroes heroes = new classes.Heroes();
@@ -62,7 +73,7 @@ public class Incidents extends HttpServlet {
                 err.printStackTrace();
             }
         } else {
-            request.setAttribute("name", UserInformation.userPosition.name);
+            request.setAttribute("name", UserInformation.userCity);
             request.getRequestDispatcher("/pages/incidents/create.jsp").forward(request, response);
         }
     }
@@ -77,6 +88,9 @@ public class Incidents extends HttpServlet {
             String pb = request.getParameter("incident");
             statement.setString(3, pb);
             UserInformation.userProbleme = pb;
+            UserInformation.userCity = name;
+            System.out.println(pb);
+            System.out.println(name);
             statement.executeUpdate();
             statement.close();
             connection.close();

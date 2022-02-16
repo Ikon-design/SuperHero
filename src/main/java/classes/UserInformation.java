@@ -6,4 +6,5 @@ public class UserInformation {
     static public double latitude = 91;
     static public double longitude = 91;
     static public String userProbleme = "";
+    static public String userCity = "";
 }

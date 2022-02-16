@@ -7,6 +7,8 @@ let distance;
 let hero;
 let probleme;
 
+var superHeroIcon = L.icon({iconUrl: 'public/img/icons.png', iconSize: [65, 65], popupAnchor: [0, -20]})
+
 if (localStorage.getItem('latitude') === null || localStorage.getItem("longitude") === null) {
     map = L.map('map').setView([48.857235, 2.308396], 13);
     L.marker([48.857235, 2.308396]).addTo(map)
@@ -30,6 +32,7 @@ if (localStorage.getItem('latitude') === null || localStorage.getItem("longitude
 }
 
 function getGeoLock(lat, lon) {
+    console.log(lat, lon)
     if (lat !== 91 && lon !== 91 && longitude === undefined && latitude === undefined) {
         localStorage.setItem("latitude", lat);
         localStorage.setItem("longitude", lon);
@@ -54,3 +57,7 @@ function showError() {
     }
 }
 
+function resetPosition() {
+    localStorage.removeItem('latitude')
+    localStorage.removeItem('longitude')
+}
