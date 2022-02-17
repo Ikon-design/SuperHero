@@ -19,7 +19,7 @@
 <body class="body-style display-flex"
       onload="getGeoLock(<%=UserInformation.latitude%>,<%=UserInformation.longitude %>)">
 <div id="map"></div>
-<a href="${pageContext.request.contextPath}/incidents" onclick="resetPosition()">Actualiser ma position</a>
+<a href="${pageContext.request.contextPath}/resetInformation" onclick="resetPosition()">Actualiser ma position</a>
 <script type="text/javascript" src="${pageContext.request.contextPath}/public/script.js"></script>
 <% ArrayList<Heroes> list = (ArrayList<Heroes>) request.getAttribute("heroes");
     for (Heroes s : list) {%>
