@@ -38,23 +38,15 @@ public class Incidents extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        System.out.println(UserInformation.userProbleme);
-        if (UserInformation.userProbleme != "") {
+        GeoCoder geoCoder = GeoCoder.cityToLatLon(UserInformation.userCity);
+        if (!UserInformation.userProbleme.equals("") && geoCoder.lat != UserInformation.latitude || geoCoder.lon != UserInformation.longitude) {
             try {
-                var client = HttpClient.newHttpClient();
-                var rt = HttpRequest.newBuilder(URI.create("http://api.openweathermap.org/geo/1.0/direct?q=" + UserInformation.userCity + "&limit=1&appid=" + UserInformation.apiKey))
-                        .header("accept", "application/json")
-                        .build();
-                var reponse = client.send(rt, HttpResponse.BodyHandlers.ofString());
-                var parsedResponse = deleteChar(reponse.body().toString());
-                ObjectMapper objectMapper = new ObjectMapper();
-                UserInformation.userPosition = objectMapper.readValue(parsedResponse, GeoCoder.class);
-                UserInformation.latitude = UserInformation.userPosition.lat;
-                UserInformation.longitude = UserInformation.userPosition.lon;
+                UserInformation.latitude = geoCoder.lat;
+                UserInformation.longitude = geoCoder.lon;
                 ArrayList<classes.Heroes> list = new ArrayList<Heroes>();
                 Connection connection = DatabaseConnection.initializeDatabase();
                 Statement statement = connection.createStatement();
-                String query = "select * from heroes WHERE heroes.fIncident = '" + UserInformation.userProbleme + "' OR heroes.sIncident = '" + UserInformation.userProbleme + "' OR heroes.tIncident = '" + UserInformation.userProbleme + "'";
+                String query = "select * from heroes";
                 ResultSet resultSet = statement.executeQuery(query);
                 while (resultSet.next()) {
                     classes.Heroes heroes = new classes.Heroes();
@@ -87,10 +79,8 @@ public class Incidents extends HttpServlet {
             statement.setString(2, name);
             String pb = request.getParameter("incident");
             statement.setString(3, pb);
-            UserInformation.userProbleme = pb;
             UserInformation.userCity = name;
-            System.out.println(pb);
-            System.out.println(name);
+            UserInformation.userProbleme = pb;
             statement.executeUpdate();
             statement.close();
             connection.close();
