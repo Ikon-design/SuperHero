@@ -23,6 +23,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @WebServlet(name = "Create incident", value = "/incidents")
@@ -38,27 +39,12 @@ public class Incidents extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        if (!UserInformation.userProbleme.equals("") ) {
         GeoCoder geoCoder = GeoCoder.cityToLatLon(UserInformation.userCity);
-        if (!UserInformation.userProbleme.equals("") && geoCoder.lat != UserInformation.latitude || geoCoder.lon != UserInformation.longitude) {
             try {
                 UserInformation.latitude = geoCoder.lat;
                 UserInformation.longitude = geoCoder.lon;
-                ArrayList<classes.Heroes> list = new ArrayList<Heroes>();
-                Connection connection = DatabaseConnection.initializeDatabase();
-                Statement statement = connection.createStatement();
-                String query = "select * from heroes";
-                ResultSet resultSet = statement.executeQuery(query);
-                while (resultSet.next()) {
-                    classes.Heroes heroes = new classes.Heroes();
-                    heroes.name = resultSet.getString("name");
-                    heroes.phone = resultSet.getString("phone");
-                    heroes.latitude = resultSet.getDouble("latitude");
-                    heroes.longitude = resultSet.getDouble("longitude");
-                    heroes.fIncident = resultSet.getString("fIncident");
-                    heroes.sIncident = resultSet.getString("sIncident");
-                    heroes.tIncident = resultSet.getString("tIncident");
-                    list.add(heroes);
-                }
+                ArrayList<Heroes> list = DatabaseConnection.getAllHeroes();
                 request.setAttribute("heroes", list);
                 request.getRequestDispatcher("/pages/incidents/index.jsp").forward(request, response);
             } catch (Exception err) {
@@ -72,18 +58,11 @@ public class Incidents extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
-            Connection connection = DatabaseConnection.initializeDatabase();
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO incidents values(?, ?, ?)");
-            statement.setInt(1, 0);
             String name = request.getParameter("name");
-            statement.setString(2, name);
             String pb = request.getParameter("incident");
-            statement.setString(3, pb);
+            DatabaseConnection.insertIncident(name, pb);
             UserInformation.userCity = name;
             UserInformation.userProbleme = pb;
-            statement.executeUpdate();
-            statement.close();
-            connection.close();
             response.sendRedirect(request.getContextPath() + "/incidents");
         } catch (Exception err) {
             err.printStackTrace();

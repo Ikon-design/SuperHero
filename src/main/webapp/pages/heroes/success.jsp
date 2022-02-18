@@ -6,6 +6,6 @@
 </head>
 <body class="body-style">
   <H1>Enregistrement effectuer</H1>
-<a href="${pageContext.request.contextPath}/pages/index.jsp">Retour à l'accueil</a>
+<a href="${pageContext.request.contextPath}/home">Retour à l'accueil</a>
 </body>
 </html>

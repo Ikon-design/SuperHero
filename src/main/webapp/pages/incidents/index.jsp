@@ -19,7 +19,20 @@
 <body class="body-style display-flex"
       onload="getGeoLock(<%=UserInformation.latitude%>,<%=UserInformation.longitude %>)">
 <div id="map"></div>
-<a href="${pageContext.request.contextPath}/resetInformation" onclick="resetPosition()">Actualiser ma position</a>
+<div class="reset-position display-flex menu">
+    <a href="${pageContext.request.contextPath}/resetInformation" onclick="resetPosition()" class="button-style">Changer mes informations</a>
+    <a href="${pageContext.request.contextPath}/home" class="button-style">Retour à l'accueil</a>
+</div>
+<div class="display-flex container-table">
+    <table id="heroesTable">
+        <tr>
+            <th>Super héro</th>
+            <th>Téléphone</th>
+        </tr>
+    </table>
+</div>
+
+
 <script type="text/javascript" src="${pageContext.request.contextPath}/public/script.js"></script>
 <% ArrayList<Heroes> list = (ArrayList<Heroes>) request.getAttribute("heroes");
     for (Heroes s : list) {%>
@@ -27,6 +40,11 @@
     hero = L.marker([<%=s.latitude%>, <%=s.longitude%>], {icon: superHeroIcon}).bindPopup("<%=s.name%>")
     distance = L.GeometryUtil.length([userPosition._latlng, hero._latlng])
     if (distance <= 5000) {
+        row = table.insertRow();
+        heroName = row.insertCell(0);
+        heroPhone = row.insertCell(1);
+        heroName.innerHTML = '<%=s.name%>';
+        heroPhone.innerHTML = '<%=s.phone%>';
         hero.addTo(map)
     }
 </script>

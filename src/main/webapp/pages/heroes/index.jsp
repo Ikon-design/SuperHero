@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/main.css">
 </head>
 <body class="form-body body-style">
-
+<a href="${pageContext.request.contextPath}/home" class="button-style reset-position">Retour à l'accueil</a>
 <form class="form-container" action="./heroes" method="post">
     <H6 class="full-width-field form-title">SUPER FORMULAIRE DE SUPER INSCRIPTION</H6>
     <div class="name-field full-width-field">

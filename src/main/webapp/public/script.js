@@ -1,11 +1,14 @@
 let dialog = document.getElementById("dialog");
+let table = document.getElementById("heroesTable");
 let map;
 let userPosition;
 let latitude;
 let longitude;
 let distance;
 let hero;
-let probleme;
+let row;
+let heroName;
+let heroPhone;
 
 var superHeroIcon = L.icon({iconUrl: 'public/img/icons.png', iconSize: [65, 65], popupAnchor: [0, -20]})
 

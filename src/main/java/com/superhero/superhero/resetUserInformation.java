@@ -23,5 +23,6 @@ public class resetUserInformation extends HttpServlet {
         System.out.println("test");
         UserInformation.resetInformation();
         response.sendRedirect("incidents");
+
     }
 }

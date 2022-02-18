@@ -15,11 +15,13 @@
 </head>
 <body class="body-style display-flex">
 <div id="map"></div>
-<form class="form-container" action="${pageContext.request.contextPath}/incidents" method="post">
-    <H6 class="full-width-field form-title">SUPER APPEL</H6>
+<a href="${pageContext.request.contextPath}/home" class="button-style reset-position">Retour à l'accueil</a>
+<form class="form-container incident-form" action="${pageContext.request.contextPath}/incidents" method="post">
+    <H5 class="full-width-field form-title">Besoin d'aide ?</H5>
+    <H6 class="full-width-field form-title">Si vous avez besoin d'aide merci de renseigner le nom de votre ville ainsi que de selectionner votre incident</H6>
     <div class="full-width-field">
         <label for="name">Votre ville :</label>
-        <input type="text" id="name" placeholder="Paris" name="name" oninput="" value="<%=request.getAttribute("name")%>">
+        <input type="text" id="name" placeholder="Paris" name="name" oninput="" value="<%=request.getAttribute("name")%>" required>
     </div>
     <div class="full-width-field">
         <label for="incident">Super incident gérable :</label>

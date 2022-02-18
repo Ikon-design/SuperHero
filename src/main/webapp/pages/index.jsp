@@ -16,10 +16,13 @@
             crossorigin=""></script>
     <script src="https://npmcdn.com/leaflet-geometryutil"></script>
 </head>
-<body class="body-style display-flex" onload="getGeoLock(<%=UserInformation.latitude%>,<%=UserInformation.longitude %>)">
+<body class="body-style display-flex"
+      onload="getGeoLock(<%=UserInformation.latitude%>,<%=UserInformation.longitude %>)">
 <div id="map"></div>
-<a class="button-style submit-button" href="${pageContext.request.contextPath}/heroes">SUPER INSCRIPTION</a>
-<a class="button-style alert-button" href="${pageContext.request.contextPath}/incidents">APPELER À <br>LA RESCOUSSE</a>
+<div class="button-container display-flex">
+    <a class="button-style submit-button" href="${pageContext.request.contextPath}/heroes">SUPER INSCRIPTION</a>
+    <a class="button-style alert-button" href="${pageContext.request.contextPath}/incidents" id="alertButton">APPELER À<br>LA RESCOUSSE</a>
+</div>
 <dialog id="dialog" class="flex-direction-column">
     <h4 class="font-family-raleway">Il semblerait que nous ne trouvons pas votre position</h4>
     <h6 class="font-family-raleway">Merci de renseigner le nom de votre ville.</h6>
@@ -30,15 +33,16 @@
 </dialog>
 <script type="text/javascript" src="${pageContext.request.contextPath}/public/script.js"></script>
 <% ArrayList<Heroes> list = (ArrayList<Heroes>) request.getAttribute("heroes");
-    for (Heroes s:list){%>
+    for (Heroes s : list) {%>
 <script>
-    hero = L.marker([<%=s.latitude%>,<%=s.longitude%>], {icon: superHeroIcon}).bindPopup("<%=s.name%>").addTo(map)
+    hero = L.marker([<%=s.latitude%>, <%=s.longitude%>], {icon: superHeroIcon}).bindPopup("<%=s.name%>").addTo(map)
     //distance = L.GeometryUtil.length([userPosition._latlng, test._latlng])
     //if (distance <= 5000 ){
-        //hero.addTo(map)
+    //hero.addTo(map)
     //}
 </script>
-<%}
+<%
+    }
 %>
 
 </body>
