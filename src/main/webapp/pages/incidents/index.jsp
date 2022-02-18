@@ -19,14 +19,14 @@
 <body class="body-style display-flex"
       onload="getGeoLock(<%=UserInformation.latitude%>,<%=UserInformation.longitude %>)">
 <div id="map"></div>
+<a href="${pageContext.request.contextPath}/resetInformation" onclick="resetPosition()">Actualiser ma position</a>
 <script type="text/javascript" src="${pageContext.request.contextPath}/public/script.js"></script>
 <% ArrayList<Heroes> list = (ArrayList<Heroes>) request.getAttribute("heroes");
     for (Heroes s : list) {%>
 <script>
-    hero = L.marker([<%=s.latitude%>, <%=s.longitude%>]).bindPopup("<%=s.name%>")
+    hero = L.marker([<%=s.latitude%>, <%=s.longitude%>], {icon: superHeroIcon}).bindPopup("<%=s.name%>")
     distance = L.GeometryUtil.length([userPosition._latlng, hero._latlng])
-    probleme = <%=UserInformation.userProbleme%>
-    if (distance <= 5000 && <%=s.fIncident%> === probleme || <%=s.sIncident%> === probleme || <%=s.tIncident%> === probleme) {
+    if (distance <= 5000) {
         hero.addTo(map)
     }
 </script>

@@ -32,8 +32,8 @@
 <% ArrayList<Heroes> list = (ArrayList<Heroes>) request.getAttribute("heroes");
     for (Heroes s:list){%>
 <script>
-    hero = L.marker([<%=s.latitude%>,<%=s.longitude%>]).bindPopup("<%=s.name%>").addTo(map)
-    distance = L.GeometryUtil.length([userPosition._latlng, test._latlng])
+    hero = L.marker([<%=s.latitude%>,<%=s.longitude%>], {icon: superHeroIcon}).bindPopup("<%=s.name%>").addTo(map)
+    //distance = L.GeometryUtil.length([userPosition._latlng, test._latlng])
     //if (distance <= 5000 ){
         //hero.addTo(map)
     //}

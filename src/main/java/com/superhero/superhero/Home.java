@@ -70,9 +70,9 @@ public class Home extends HttpServlet {
             var parsedResponse = deleteChar(reponse.body().toString());
             ObjectMapper objectMapper = new ObjectMapper();
             UserInformation.userPosition = objectMapper.readValue(parsedResponse, GeoCoder.class);
-            System.out.println(UserInformation.userPosition.name);
             UserInformation.latitude = UserInformation.userPosition.lat;
             UserInformation.longitude = UserInformation.userPosition.lon;
+            UserInformation.userCity = UserInformation.userPosition.name;
             response.sendRedirect(request.getContextPath() + "/home");
         } catch (Exception err) {
             err.printStackTrace();
